@@ -1,5 +1,14 @@
 FROM python:3.9-slim
 
+# 安装系统依赖
+RUN apt-get update && apt-get install -y \
+    nodejs \
+    npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# 安装mermaid-cli
+RUN npm install -g @mermaid-js/mermaid-cli
+
 # 设置工作目录
 WORKDIR /app
 
