@@ -5,4 +5,5 @@ black==23.10.1
 pyinstaller==6.5.0  # 用于打包exe文件
 requests>=2.28.2
 html2docx>=1.6.0  # 用于HTML转换
-flask>=2.0.0  # 用于API服务 
+flask>=2.0.0  # 用于API服务
+pillow>=10.0.0  # 用于图片处理 

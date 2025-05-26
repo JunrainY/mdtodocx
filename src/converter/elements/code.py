@@ -37,6 +37,16 @@ class CodeConverter(ElementConverter):
         if not self.document:
             raise ValueError("Document not set")
 
+        # 检查是否为mermaid代码块
+        if hasattr(token, 'info') and token.info.strip().lower() == 'mermaid':
+            # 如果有mermaid转换器，使用它处理
+            if 'mermaid' in self.base_converter.converters:
+                return self.base_converter.converters['mermaid'].convert(token)
+            else:
+                # 如果没有mermaid转换器，作为普通代码块处理
+                if self.base_converter.debug:
+                    print("警告: 未找到Mermaid转换器，将作为普通代码块处理")
+
         # 如果上一个是代码块，添加空行
         if self._last_was_code:
             self.document.add_paragraph()

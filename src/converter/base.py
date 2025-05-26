@@ -17,7 +17,8 @@ from .elements import (
     TableConverter,
     HRConverter,
     TaskListConverter,
-    HtmlConverter
+    HtmlConverter,
+    MermaidConverter
 )
 
 
@@ -77,6 +78,7 @@ class BaseConverter:
         self.register_converter('hr', HRConverter(self))
         self.register_converter('task_list', TaskListConverter(self))
         self.register_converter('html', HtmlConverter(self))  # 注册HTML转换器
+        self.register_converter('mermaid', MermaidConverter(self))  # 注册Mermaid转换器
     
     def register_converter(self, element_type: str, converter: ElementConverter):
         """注册一个元素转换器

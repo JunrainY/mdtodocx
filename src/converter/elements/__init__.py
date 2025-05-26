@@ -13,6 +13,7 @@ from .table import TableConverter
 from .hr import HRConverter
 from .task_list import TaskListConverter
 from .html import HtmlConverter
+from .mermaid import MermaidConverter
 
 __all__ = [
     'ElementConverter',
@@ -26,5 +27,6 @@ __all__ = [
     'TableConverter',
     'HRConverter',
     'TaskListConverter',
-    'HtmlConverter'
+    'HtmlConverter',
+    'MermaidConverter'
 ] 

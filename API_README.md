@@ -2,6 +2,14 @@
 
 这是一个基于Flask的Web API服务，用于将Markdown文件转换为DOCX(Word)文件。
 
+## 特性
+
+- 支持标准Markdown语法
+- 支持Mermaid图表转换
+- API密钥鉴权
+- 文件和文本转换接口
+- 调试模式
+
 ## 安装
 
 1. 确保已安装Python 3.7+
@@ -9,6 +17,12 @@
 
 ```bash
 pip install -r requirements.txt
+```
+
+3. 安装Mermaid CLI（用于图表转换）
+
+```bash
+npm install -g @mermaid-js/mermaid-cli
 ```
 
 ## 启动API服务
@@ -22,12 +36,13 @@ python run_api.py --api-key your-secret-key
 ### 命令行选项
 
 ```bash
-python run_api.py --host 127.0.0.1 --port 8080 --debug
+python run_api.py --api-key your-secret-key --debug
 ```
 
 - `--host`: 指定监听的主机地址，默认为 `0.0.0.0`
 - `--port`: 指定监听的端口，默认为 `5000`
 - `--debug`: 启用调试模式
+- `--api-key`: 密钥
 
 ### 环境变量设置
 
@@ -127,8 +142,32 @@ curl -X POST \
 
 **示例**:
 ```bash
-curl http://localhost:5000/api/health
+curl -H "X-API-Key: your-secret-key" http://localhost:5000/api/test-auth
 ```
+
+## Mermaid图表支持
+
+服务支持将Markdown中的Mermaid图表转换为图片。在Markdown中使用以下格式：
+
+```markdown
+```mermaid
+graph TD
+    A[开始] --> B{判断}
+    B -- 是 --> C[处理1]
+    B -- 否 --> D[处理2]
+    C --> E[结束]
+    D --> E
+```
+```
+
+支持的图表类型：
+- 流程图（graph/flowchart）
+- 时序图（sequence diagram）
+- 类图（class diagram）
+- 状态图（state diagram）
+- 甘特图（gantt）
+- 饼图（pie）
+- 用户旅程图（journey）
 
 ## 使用客户端示例
 
@@ -170,10 +209,10 @@ API在遇到错误时会返回相应的HTTP状态码和JSON格式的错误信息
 }
 ```
 
-常见错误状态码：
-- 400: 请求参数错误
+常见错误：
 - 401: 未授权（API密钥无效或未提供）
-- 500: 服务器内部错误
+- 400: 请求参数错误
+- 500: 服务器内部错误（如Mermaid图表转换失败）
 
 ## 部署建议
 

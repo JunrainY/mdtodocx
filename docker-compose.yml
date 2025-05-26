@@ -9,9 +9,11 @@ services:
     environment:
       - DEBUG=false
       - API_KEY=your-secret-api-key
+      - NODE_PATH=/usr/local/lib/node_modules
     restart: unless-stopped
     volumes:
       - ./logs:/app/logs
+      - ./temp:/app/temp
     networks:
       - md2docx-network
 
